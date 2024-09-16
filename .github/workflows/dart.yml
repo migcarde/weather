@@ -23,10 +23,6 @@ jobs:
       # https://github.com/dart-lang/setup-dart/blob/main/README.md
       # - uses: dart-lang/setup-dart@v1
 
-      - uses: dart-lang/setup-dart@v1
-        with:
-          sdk: 3.5.3
-
       - uses: subosito/flutter-action@v2
         with:
           flutter-version-file: pubspec.yaml
