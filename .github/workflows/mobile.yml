@@ -3,7 +3,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Android build
+name: Mobile build
 
 on:
   push:
@@ -12,7 +12,8 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build-android:
+    name: Build Android
     runs-on: ubuntu-latest
 
     steps:
