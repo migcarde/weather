@@ -22,6 +22,12 @@ jobs:
       # You can specify other versions if desired, see documentation here:
       # https://github.com/dart-lang/setup-dart/blob/main/README.md
       # - uses: dart-lang/setup-dart@v1
+      - name: Intall java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17.x'
+
       - uses: subosito/flutter-action@v2
         with:
           flutter-version-file: pubspec.yaml
