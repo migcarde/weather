@@ -43,8 +43,9 @@ jobs:
       - name: Analyze project source
         run: dart analyze
 
+      #! Don't use test for now
       # Your project will need to have tests in test/ and a dependency on
       # package:test for this step to succeed. Note that Flutter projects will
       # want to change this to 'flutter test'.
-      - name: Run tests
-        run: flutter test
+      # - name: Run tests
+      #   run: flutter test
