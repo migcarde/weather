@@ -3,7 +3,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Dart
+name: Android build
 
 on:
   push:
@@ -38,8 +38,10 @@ jobs:
       - name: Analyze project source
         run: dart analyze
       
-      - run: flutter build apk
-      - run: flutter build appbundle
+      - name: Build apk
+        run: flutter build apk
+      # - name: Release build
+      #   run: flutter build appbundle
 
       #! Don't use test for now
       # Your project will need to have tests in test/ and a dependency on
