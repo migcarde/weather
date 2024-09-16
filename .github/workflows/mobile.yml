@@ -3,7 +3,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Dart
+name: Mobile build
 
 on:
   push:
@@ -12,7 +12,8 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build-android:
+    name: Build Android
     runs-on: ubuntu-latest
 
     steps:
@@ -22,14 +23,15 @@ jobs:
       # You can specify other versions if desired, see documentation here:
       # https://github.com/dart-lang/setup-dart/blob/main/README.md
       # - uses: dart-lang/setup-dart@v1
-
-      - uses: dart-lang/setup-dart@v1
+      - name: Intall java
+        uses: actions/setup-java@v4
         with:
-          sdk: 3.5.3
+          distribution: 'zulu'
+          java-version: '17.x'
 
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.24.3"
+          flutter-version-file: pubspec.yaml
           channel: "stable"
 
       - name: Install dependencies
@@ -42,6 +44,11 @@ jobs:
       # Consider passing '--fatal-infos' for slightly stricter analysis.
       - name: Analyze project source
         run: dart analyze
+      
+      - name: Build apk
+        run: flutter build apk
+      # - name: Release build
+      #   run: flutter build appbundle
 
       #! Don't use test for now
       # Your project will need to have tests in test/ and a dependency on
