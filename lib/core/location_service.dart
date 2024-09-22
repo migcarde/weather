@@ -21,8 +21,8 @@ class LocationService {
 
     final permissionStatus = await location.requestPermission();
 
-    if (permissionStatus == PermissionStatus.granted ||
-        permissionStatus == PermissionStatus.grantedLimited) {
+    if (permissionStatus != PermissionStatus.granted ||
+        permissionStatus != PermissionStatus.grantedLimited) {
       return false;
     }
 
