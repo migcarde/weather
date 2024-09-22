@@ -19,7 +19,7 @@ class MainApp extends StatelessWidget {
           child: BlocProvider(
             create: (context) => LocationCubit(
               locationService: LocationService(),
-            ),
+            )..getLocation(),
             child: BlocBuilder<LocationCubit, LocationState>(
               builder: (context, state) {
                 switch (state.status) {
