@@ -7,10 +7,13 @@ name: Mobile build
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
+      - develop
   pull_request:
-    branches: [ "main" ]
-
+    branches:
+      - main
+      - develop
 jobs:
   build-android:
     name: Build Android test force push
@@ -48,6 +51,51 @@ jobs:
       
       - name: Build apk
         run: flutter build apk
+      # - name: Release build
+      #   run: flutter build appbundle
+
+      #! Don't use test for now
+      # Your project will need to have tests in test/ and a dependency on
+      # package:test for this step to succeed. Note that Flutter projects will
+      # want to change this to 'flutter test'.
+      # - name: Run tests
+      #   run: flutter test
+
+  build-ios:
+    name: Build iOS
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Note: This workflow uses the latest stable version of the Dart SDK.
+      # You can specify other versions if desired, see documentation here:
+      # https://github.com/dart-lang/setup-dart/blob/main/README.md
+      # - uses: dart-lang/setup-dart@v1
+      - name: Intall java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17.x'
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version-file: pubspec.yaml
+          channel: "stable"
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      # Uncomment this step to verify the use of 'dart format' on each commit.
+      # - name: Verify formatting
+      #   run: dart format --output=none --set-exit-if-changed .
+
+      # Consider passing '--fatal-infos' for slightly stricter analysis.
+      - name: Analyze project source
+        run: dart analyze
+      
+      - name: Build IPA
+        run: flutter build ipa --no-codesign
       # - name: Release build
       #   run: flutter build appbundle
 
