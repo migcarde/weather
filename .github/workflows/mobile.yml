@@ -63,7 +63,7 @@ jobs:
 
   build-ios:
     name: Build iOS
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
       - uses: actions/checkout@v4
