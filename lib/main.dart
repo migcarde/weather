@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather/core/app_theme.dart';
 import 'package:weather/core/location_service.dart';
 import 'package:weather/ui/location/cubit/location_cubit.dart';
 import 'package:weather/ui/location/location_widget.dart';
@@ -14,6 +15,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: AppTheme.mainTheme(),
       home: Scaffold(
         body: Center(
           child: BlocProvider(
