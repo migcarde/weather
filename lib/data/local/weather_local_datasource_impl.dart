@@ -15,13 +15,27 @@ class WeatherLocalDatasourceImpl extends WeatherLocalDatasource {
   @override
   Future<WeatherLocalEntity?> getWeather() async {
     try {
-      final box = await Hive.getBox<WeatherLocalEntity>(_boxName);
+      final box = await hive.getBox<WeatherLocalEntity>(_boxName);
       final result = box.values.first;
       box.close();
 
       return result;
     } catch (e) {
+      // TODO: Add logs
       return null;
+    }
+  }
+
+  @override
+  Future<void> saveWeather(WeatherLocalEntity weather) async {
+    try {
+      final box = await hive.getBox<WeatherLocalEntity>(_boxName);
+
+      await box.clear();
+      await box.add(weather);
+      box.close();
+    } catch (e) {
+      // TODO: Add logs
     }
   }
 }

@@ -2,6 +2,8 @@ import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 import 'package:weather/data/local/local_types_ids.dart';
 
+part 'weather_local_entity.g.dart';
+
 @HiveType(typeId: LocalTypesIds.weatherTypeId)
 class WeatherLocalEntity extends HiveObject with EquatableMixin {
   @HiveField(0)
