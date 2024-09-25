@@ -16,8 +16,9 @@ class HomeState extends Equatable {
   });
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         status,
+        homeViewModel,
       ];
 
   HomeState copyWith({
