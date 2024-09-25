@@ -15,4 +15,8 @@ class WeatherRepositoryImpl extends WeatherRepository {
 
     return result?.toLocal();
   }
+
+  @override
+  Future<void> saveWeather(WeatherBusiness weather) =>
+      localDatasource.saveWeather(weather.local);
 }
