@@ -85,4 +85,56 @@ void main() {
       );
     },
   );
+
+  group(
+    'Save weather to local -',
+    () {
+      final successResult = WeatherLocalEntity(
+        latitude: 0.0,
+        longitude: 1.0,
+        locationName: 'locationName',
+      );
+      test(
+        'Success',
+        () async {
+          // Given
+          when(() => hiveInterfaceMock.isBoxOpen(box))
+              .thenAnswer((invocation) => false);
+          when(() => hiveInterfaceMock.openBox<WeatherLocalEntity>(box))
+              .thenAnswer(
+            (invocation) async => boxMock,
+          );
+          when(() => boxMock.clear()).thenAnswer((invocation) async => 1);
+          when(() => boxMock.add(successResult))
+              .thenAnswer((invocation) async => 1);
+
+          // Then
+          expect(() async => weatherLocalDatasource.saveWeather(successResult),
+              isA<void>());
+        },
+      );
+
+      test(
+        'Failure and do nothing',
+        () async {
+          // Given
+          when(() => hiveInterfaceMock.isBoxOpen(box))
+              .thenAnswer((invocation) => false);
+          when(() => hiveInterfaceMock.openBox<WeatherLocalEntity>(box))
+              .thenAnswer(
+            (invocation) async => boxMock,
+          );
+          when(() => boxMock.clear()).thenAnswer((invocation) async => 1);
+          when(() => boxMock.add(successResult))
+              .thenThrow((invocation) async => Exception());
+
+          // Then
+          expect(
+              () async =>
+                  await weatherLocalDatasource.saveWeather(successResult),
+              isA<void>());
+        },
+      );
+    },
+  );
 }
