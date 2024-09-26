@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:geocoding/geocoding.dart';
 import 'package:weather/core/location_service.dart';
 import 'package:weather/domain/base/base_use_case.dart';
 import 'package:weather/domain/models/weather_business.dart';
@@ -65,9 +64,9 @@ class HomeCubit extends Cubit<HomeState> {
     if (location != null &&
         location.latitude != null &&
         location.longitude != null) {
-      final placemarks = await placemarkFromCoordinates(
-        location.latitude!,
-        location.longitude!,
+      final placemarks = await locationService.getPlacemarkFromLocation(
+        latitude: location.latitude!,
+        longitude: location.longitude!,
       );
 
       final result = WeatherBusiness(

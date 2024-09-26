@@ -1,3 +1,4 @@
+import 'package:geocoding/geocoding.dart' as geocoding;
 import 'package:location/location.dart';
 
 class LocationService {
@@ -28,4 +29,10 @@ class LocationService {
 
     return true;
   }
+
+  Future<List<geocoding.Placemark>> getPlacemarkFromLocation({
+    required double latitude,
+    required double longitude,
+  }) async =>
+      await getPlacemarkFromLocation(latitude: latitude, longitude: longitude);
 }
