@@ -1,6 +1,7 @@
+import 'package:equatable/equatable.dart';
 import 'package:weather/data/local/weather_local_entity.dart';
 
-class WeatherBusiness {
+class WeatherBusiness extends Equatable {
   final double latitude;
   final double longitude;
   final String locationName;
@@ -16,6 +17,13 @@ class WeatherBusiness {
         longitude: longitude,
         locationName: locationName,
       );
+
+  @override
+  List<Object?> get props => [
+        latitude,
+        longitude,
+        locationName,
+      ];
 }
 
 extension WeatherLocalEntityExtensions on WeatherLocalEntity {
