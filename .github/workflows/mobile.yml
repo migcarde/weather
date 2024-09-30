@@ -16,7 +16,8 @@ on:
       - develop
 jobs:
   build-android:
-    name: Build Android
+    name: Build Android test force push
+    
     runs-on: ubuntu-latest
 
     steps:
