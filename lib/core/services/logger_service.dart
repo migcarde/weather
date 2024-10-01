@@ -7,7 +7,7 @@ class LoggerService {
 
   factory LoggerService() => _instance;
 
-  final _logger = Logger(
+  static final _logger = Logger(
     printer: PrettyPrinter(
       methodCount: 2,
       errorMethodCount: 8,
