@@ -22,7 +22,7 @@ class WeatherLocalDatasourceImpl extends WeatherLocalDatasource {
 
       return result;
     } catch (e) {
-      logger.error(e.toString());
+      logger.error(e);
 
       return null;
     }
@@ -37,7 +37,7 @@ class WeatherLocalDatasourceImpl extends WeatherLocalDatasource {
       await box.add(weather);
       box.close();
     } catch (e) {
-      logger.error(e.toString());
+      logger.error(e);
     }
   }
 }

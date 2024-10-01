@@ -20,10 +20,10 @@ class LoggerService {
 
   LoggerService._internal();
 
-  void trace(String message) => _logger.t(message);
-  void debug(String message) => _logger.d(message);
-  void information(String message) => _logger.i(message);
-  void warning(String message) => _logger.w(message);
-  void error(String message) => _logger.e(message);
-  void fatal(String message) => _logger.f(message);
+  void trace(Object message) => _logger.t(message);
+  void debug(Object message) => _logger.d(message);
+  void information(Object message) => _logger.i(message);
+  void warning(Object message) => _logger.w(message);
+  void error(Object message) => _logger.e(message);
+  void fatal(Object message) => _logger.f(message);
 }
