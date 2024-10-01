@@ -1,5 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:weather/core/extensions/hive_extensions.dart';
+import 'package:weather/core/services/logger_service.dart';
 import 'package:weather/data/local/weather_local_datasource.dart';
 import 'package:weather/data/local/weather_local_entity.dart';
 
@@ -21,7 +22,8 @@ class WeatherLocalDatasourceImpl extends WeatherLocalDatasource {
 
       return result;
     } catch (e) {
-      // TODO: Add logs
+      logger.error(e.toString());
+
       return null;
     }
   }
@@ -35,7 +37,7 @@ class WeatherLocalDatasourceImpl extends WeatherLocalDatasource {
       await box.add(weather);
       box.close();
     } catch (e) {
-      // TODO: Add logs
+      logger.error(e.toString());
     }
   }
 }

@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:weather/core/location_service.dart';
+import 'package:weather/core/services/location_service.dart';
 import 'package:weather/domain/base/base_use_case.dart';
 import 'package:weather/domain/models/weather_business.dart';
 import 'package:weather/domain/operations/get_weather.dart';

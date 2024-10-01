@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:location/location.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:weather/core/location_service.dart';
+import 'package:weather/core/services/location_service.dart';
 import 'package:weather/domain/base/base_use_case.dart';
 import 'package:weather/domain/models/weather_business.dart';
 import 'package:weather/domain/operations/get_weather.dart';
