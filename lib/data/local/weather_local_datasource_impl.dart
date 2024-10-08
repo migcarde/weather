@@ -18,7 +18,7 @@ class WeatherLocalDatasourceImpl extends WeatherLocalDatasource {
     try {
       final box = await hive.getBox<WeatherLocalEntity>(_boxName);
       final result = box.values.first;
-      box.close();
+      await box.close();
 
       return result;
     } catch (e) {
@@ -35,7 +35,7 @@ class WeatherLocalDatasourceImpl extends WeatherLocalDatasource {
 
       await box.clear();
       await box.add(weather);
-      box.close();
+      await box.close();
     } catch (e) {
       logger.error(e);
     }
