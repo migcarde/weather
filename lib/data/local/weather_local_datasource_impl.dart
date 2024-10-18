@@ -17,7 +17,7 @@ class WeatherLocalDatasourceImpl extends WeatherLocalDatasource {
   Future<WeatherLocalEntity?> getWeather() async {
     try {
       final box = await hive.getBox<WeatherLocalEntity>(_boxName);
-      final result = box.values.first;
+      final result = box.values.firstOrNull;
       await box.close();
 
       return result;

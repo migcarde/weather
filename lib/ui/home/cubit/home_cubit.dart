@@ -90,6 +90,7 @@ class HomeCubit extends Cubit<HomeState> {
 
           emit(
             state.copyWith(
+              status: HomeStatus.data,
               homeViewModel: homeViewModel,
             ),
           );
