@@ -1,10 +1,12 @@
+import 'dart:typed_data';
+
 import 'package:equatable/equatable.dart';
 import 'package:weather/domain/models/business/weather_data_business.dart';
 import 'package:weather/domain/models/weather_data_entity.dart';
 
 class WeatherDetailsViewModel extends Equatable {
   final DateTime time;
-  final List<int> icon;
+  final Uint8List icon;
   final double precipitation;
   final int clouds;
   final int visibility;
@@ -13,6 +15,7 @@ class WeatherDetailsViewModel extends Equatable {
   final double minTemperature;
   final double maxTemperature;
   final double temperature;
+  final String weather;
 
   const WeatherDetailsViewModel({
     required this.time,
@@ -25,6 +28,7 @@ class WeatherDetailsViewModel extends Equatable {
     required this.minTemperature,
     required this.maxTemperature,
     required this.temperature,
+    required this.weather,
   });
 
   @override
@@ -39,6 +43,7 @@ class WeatherDetailsViewModel extends Equatable {
         minTemperature,
         maxTemperature,
         temperature,
+        weather,
       ];
 
   WeatherDataBusiness get business => WeatherDataBusiness(
@@ -52,6 +57,7 @@ class WeatherDetailsViewModel extends Equatable {
         windSpeed: windSpeed,
         precipitation: precipitation,
         visibility: visibility,
+        weather: weather,
       );
 }
 
@@ -61,7 +67,7 @@ extension WeatherDataEntityExtensions on WeatherDataEntity {
   }) =>
       WeatherDetailsViewModel(
         time: date,
-        icon: icon,
+        icon: Uint8List.fromList(icon),
         precipitation: precipitation,
         clouds: clouds,
         visibility: visibility,
@@ -69,14 +75,17 @@ extension WeatherDataEntityExtensions on WeatherDataEntity {
         pressure: main?.pressure ?? 0,
         minTemperature: main?.minTemperature ?? 0.0,
         maxTemperature: main?.maxTemperature ?? 0.0,
-        temperature: main?.temperature ?? 0.0,
+        // Temperature always in celsius
+        temperature:
+            main?.temperature != null ? main!.temperature - 273.0 : 0.0,
+        weather: details.first.main,
       );
 }
 
 extension WeatherDataBusinessExtensions on WeatherDataBusiness {
   WeatherDetailsViewModel toViewModel() => WeatherDetailsViewModel(
         time: time,
-        icon: icon,
+        icon: Uint8List.fromList(icon),
         precipitation: precipitation,
         clouds: clouds,
         visibility: visibility,
@@ -85,5 +94,6 @@ extension WeatherDataBusinessExtensions on WeatherDataBusiness {
         minTemperature: minTemperature,
         maxTemperature: maxTemperature,
         temperature: temperature,
+        weather: weather,
       );
 }

@@ -12,6 +12,7 @@ class WeatherDataBusiness extends Equatable {
   final double windSpeed;
   final double precipitation;
   final int visibility;
+  final String weather;
 
   const WeatherDataBusiness({
     required this.time,
@@ -24,6 +25,7 @@ class WeatherDataBusiness extends Equatable {
     required this.windSpeed,
     required this.precipitation,
     required this.visibility,
+    required this.weather,
   });
 
   @override
@@ -37,7 +39,8 @@ class WeatherDataBusiness extends Equatable {
         clouds,
         windSpeed,
         precipitation,
-        visibility
+        visibility,
+        weather,
       ];
 
   WeatherDetailsLocalEntity get local => WeatherDetailsLocalEntity(
@@ -51,6 +54,7 @@ class WeatherDataBusiness extends Equatable {
         minTemperature: minTemperature,
         maxTemperature: maxTemperature,
         temperature: temperature,
+        weather: weather,
       );
 }
 
@@ -66,5 +70,6 @@ extension WeatherDataLocalEntityExtensions on WeatherDetailsLocalEntity {
         windSpeed: windSpeed,
         precipitation: precipitation,
         visibility: visibility,
+        weather: weather,
       );
 }

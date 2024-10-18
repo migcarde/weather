@@ -17,7 +17,7 @@ class IconLocalDatasourceImpl extends IconLocalDatasource {
   Future<IconLocalEntity?> getIcon(int iconId) async {
     try {
       final box = await hive.getBox<IconLocalEntity>(_boxName);
-      final result = box.values.where((icon) => icon.id == iconId).first;
+      final result = box.values.where((icon) => icon.id == iconId).firstOrNull;
       await box.close();
 
       return result;
@@ -32,7 +32,7 @@ class IconLocalDatasourceImpl extends IconLocalDatasource {
   Future<void> saveIcon(IconLocalEntity icon) async {
     try {
       final box = await hive.getBox<IconLocalEntity>(_boxName);
-      box.add(icon);
+      await box.add(icon);
       await box.close();
     } catch (e) {
       logger.error(e);

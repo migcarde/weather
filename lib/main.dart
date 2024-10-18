@@ -4,8 +4,9 @@ import 'package:weather/core/app_theme.dart';
 import 'package:weather/core/di/weather_di.dart';
 import 'package:weather/core/locator.dart';
 import 'package:weather/data/local/hive_adapters.dart';
+import 'package:weather/l10n/app_localizations.dart';
 import 'package:weather/ui/home/cubit/home_cubit.dart';
-import 'package:weather/ui/location/location_widget.dart';
+import 'package:weather/ui/home/home_page.dart';
 
 void main() async {
   await WeatherDi.init();
@@ -21,25 +22,35 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: AppTheme.mainTheme(),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       home: Scaffold(
-        body: Center(
-          child: BlocProvider(
-            create: (context) => locator<HomeCubit>()..init(),
-            child: BlocBuilder<HomeCubit, HomeState>(
-              builder: (context, state) {
-                switch (state.status) {
-                  case HomeStatus.initial:
-                    return const SizedBox();
-                  case HomeStatus.loading:
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  case HomeStatus.data:
-                    return LocationWidget(
-                      location: state.homeViewModel?.locationName ?? 'Unknown',
-                    );
-                }
-              },
+        body: SafeArea(
+          child: Container(
+            width: double.infinity,
+            height: double.infinity,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20.0,
+              vertical: 24.0,
+            ),
+            child: BlocProvider(
+              create: (context) => locator<HomeCubit>()..init(),
+              child: BlocBuilder<HomeCubit, HomeState>(
+                builder: (context, state) {
+                  switch (state.status) {
+                    case HomeStatus.initial:
+                      return const SizedBox();
+                    case HomeStatus.loading:
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    case HomeStatus.data:
+                      return HomePage(
+                        currentForecast: state.homeViewModel!,
+                      );
+                  }
+                },
+              ),
             ),
           ),
         ),

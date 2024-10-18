@@ -36,6 +36,9 @@ class WeatherDetailsLocalEntity extends HiveObject with EquatableMixin {
   @HiveField(9)
   final double temperature;
 
+  @HiveField(10)
+  final String weather;
+
   WeatherDetailsLocalEntity({
     required this.time,
     required this.icon,
@@ -47,6 +50,7 @@ class WeatherDetailsLocalEntity extends HiveObject with EquatableMixin {
     required this.minTemperature,
     required this.maxTemperature,
     required this.temperature,
+    required this.weather,
   });
 
   @override
@@ -61,5 +65,6 @@ class WeatherDetailsLocalEntity extends HiveObject with EquatableMixin {
         minTemperature,
         maxTemperature,
         temperature,
+        weather,
       ];
 }

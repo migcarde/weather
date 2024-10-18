@@ -90,6 +90,7 @@ class HomeCubit extends Cubit<HomeState> {
 
           emit(
             state.copyWith(
+              status: HomeStatus.data,
               homeViewModel: homeViewModel,
             ),
           );
@@ -121,7 +122,6 @@ class HomeCubit extends Cubit<HomeState> {
         icon: iconResult.success ?? [],
       );
 
-      //! Overflow, check if fix it with result.contains
       final index = result.indexWhere(
         (e) => DateUtils.isSameDay(
           e.date,

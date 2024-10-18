@@ -2,8 +2,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:weather/data/local/weather_local_datasource.dart';
 import 'package:weather/data/local/weather_local_entity.dart';
-import 'package:weather/domain/models/weather_business.dart';
-import 'package:weather/domain/operations/weather_repository_impl.dart';
+import 'package:weather/domain/models/business/weather_business.dart';
+import 'package:weather/domain/operations/weather/weather_repository_impl.dart';
 
 class WeatherLocalDataSourceMock extends Mock
     implements WeatherLocalDatasource {}
@@ -44,7 +44,7 @@ void main() {
           );
 
           // When
-          final result = await weatherRepositoryImpl.getWeather();
+          final result = await weatherRepositoryImpl.getWeatherFromLocal();
 
           // Then
           expect(result, successResult);
@@ -60,7 +60,7 @@ void main() {
             Exception(),
           );
           // Then
-          expect(() async => weatherRepositoryImpl.getWeather(),
+          expect(() async => weatherRepositoryImpl.getWeatherFromLocal(),
               throwsA(isInstanceOf<Exception>()));
           verify(() => weatherLocalDataSource.getWeather()).called(1);
         },

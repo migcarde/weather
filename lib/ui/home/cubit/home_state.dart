@@ -29,4 +29,9 @@ class HomeState extends Equatable {
         status: status ?? this.status,
         homeViewModel: homeViewModel ?? this.homeViewModel,
       );
+
+  bool get hasWeatherData =>
+      homeViewModel != null &&
+      homeViewModel!.weatherDays.isNotEmpty &&
+      homeViewModel!.weatherDays.first.weatherData.isNotEmpty;
 }
