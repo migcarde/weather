@@ -5,15 +5,15 @@ import 'package:location/location.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:weather/core/services/location_service.dart';
 import 'package:weather/domain/base/base_use_case.dart';
-import 'package:weather/domain/models/weather_business.dart';
-import 'package:weather/domain/operations/get_weather.dart';
-import 'package:weather/domain/operations/save_weather.dart';
+import 'package:weather/domain/models/business/weather_business.dart';
+import 'package:weather/domain/operations/weather/get_weather_from_local.dart';
+import 'package:weather/domain/operations/weather/save_weather.dart';
 import 'package:weather/ui/home/cubit/home_cubit.dart';
 import 'package:weather/ui/home/models/home_view_model.dart';
 
 class LocationServiceMock extends Mock implements LocationService {}
 
-class GetWeatherMock extends Mock implements GetWeather {}
+class GetWeatherMock extends Mock implements GetWeatherFromLocal {}
 
 class SaveWeatherMock extends Mock implements SaveWeather {}
 
@@ -28,7 +28,7 @@ void main() {
     getWeather = GetWeatherMock();
     saveWeather = SaveWeatherMock();
     cubit = HomeCubit(
-      getWeather: getWeather,
+      getWeatherFromLocal: getWeather,
       saveWeather: saveWeather,
       locationService: locationService,
     );

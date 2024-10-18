@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:weather/domain/models/weather_business.dart';
-import 'package:weather/domain/operations/save_weather.dart';
-import 'package:weather/domain/operations/weather_repository.dart';
+import 'package:weather/domain/models/business/weather_business.dart';
+import 'package:weather/domain/operations/weather/save_weather.dart';
+import 'package:weather/domain/operations/weather/weather_repository.dart';
 
 class WeatherRepositoryMock extends Mock implements WeatherRepository {}
 
