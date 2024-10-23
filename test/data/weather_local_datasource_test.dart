@@ -1,8 +1,11 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:weather/data/local/weather_day_local_entity.dart';
+import 'package:weather/data/local/weather_details_local_entity.dart';
 import 'package:weather/data/local/weather_local_datasource_impl.dart';
 import 'package:weather/data/local/weather_local_entity.dart';
 
@@ -27,14 +30,41 @@ void main() {
     );
   });
 
+  final sunrise = DateTime(2024, 09, 09);
+  final sunset = DateTime(2024, 10, 10);
+  final currentDate = DateTime(2024, 09, 09, 10, 10, 10);
+
+  final successResult = WeatherLocalEntity(
+    latitude: 0.0,
+    longitude: 1.0,
+    locationName: 'locationName',
+    sunrise: sunrise,
+    sunset: sunset,
+    weatherDays: [
+      WeatherDayLocalEntity(
+        date: currentDate,
+        weatherData: [
+          WeatherDetailsLocalEntity(
+            time: currentDate,
+            icon: Uint8List(1),
+            precipitation: 10.0,
+            clouds: 20,
+            visibility: 30,
+            windSpeed: 40.0,
+            pressure: 50,
+            minTemperature: 60.0,
+            maxTemperature: 70.0,
+            temperature: 65.0,
+            weather: 'weather',
+          ),
+        ],
+      ),
+    ],
+  );
+
   group(
     'Get weather from local -',
     () {
-      final successResult = WeatherLocalEntity(
-        latitude: 0.0,
-        longitude: 1.0,
-        locationName: 'locationName',
-      );
       test(
         'Success',
         () async {
@@ -89,11 +119,6 @@ void main() {
   group(
     'Save weather to local -',
     () {
-      final successResult = WeatherLocalEntity(
-        latitude: 0.0,
-        longitude: 1.0,
-        locationName: 'locationName',
-      );
       test(
         'Success',
         () async {
