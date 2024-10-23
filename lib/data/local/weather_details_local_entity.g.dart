@@ -19,7 +19,7 @@ class WeatherDetailsLocalEntityAdapter
     };
     return WeatherDetailsLocalEntity(
       time: fields[0] as DateTime,
-      icon: (fields[1] as List).cast<int>(),
+      icon: fields[1] as Uint8List,
       precipitation: fields[2] as double,
       clouds: fields[3] as int,
       visibility: fields[4] as int,
@@ -28,13 +28,14 @@ class WeatherDetailsLocalEntityAdapter
       minTemperature: fields[7] as double,
       maxTemperature: fields[8] as double,
       temperature: fields[9] as double,
+      weather: fields[10] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, WeatherDetailsLocalEntity obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(11)
       ..writeByte(0)
       ..write(obj.time)
       ..writeByte(1)
@@ -54,7 +55,9 @@ class WeatherDetailsLocalEntityAdapter
       ..writeByte(8)
       ..write(obj.maxTemperature)
       ..writeByte(9)
-      ..write(obj.temperature);
+      ..write(obj.temperature)
+      ..writeByte(10)
+      ..write(obj.weather);
   }
 
   @override

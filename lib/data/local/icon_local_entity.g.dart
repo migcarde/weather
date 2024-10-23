@@ -18,7 +18,7 @@ class IconLocalEntityAdapter extends TypeAdapter<IconLocalEntity> {
     };
     return IconLocalEntity(
       id: fields[0] as int,
-      image: (fields[1] as List).cast<int>(),
+      image: fields[1] as Uint8List,
     );
   }
 
