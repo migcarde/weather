@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:weather/core/constants/box_decoration_constants.dart';
 import 'package:weather/l10n/app_localizations.dart';

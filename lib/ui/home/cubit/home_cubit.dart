@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -95,12 +97,15 @@ class HomeCubit extends Cubit<HomeState> {
             ),
           );
         },
-        // TODO: Check this failure case
-        (failure) => emit(
-          state.copyWith(
-            status: HomeStatus.data,
-          ),
-        ),
+        (failure) {
+          emit(
+            state.copyWith(
+              status: state.homeViewModel != null
+                  ? HomeStatus.data
+                  : HomeStatus.failure,
+            ),
+          );
+        },
       );
     }
   }
@@ -118,8 +123,12 @@ class HomeCubit extends Cubit<HomeState> {
           iconPath: weatherDetails.details.first.icon,
         ),
       );
+
+      var icon = Uint8List.fromList([]);
+      iconResult.ifSuccess((iconData) => icon = iconData);
+
       final weatherData = weatherDetails.toViewModel(
-        icon: iconResult.success ?? [],
+        icon: icon,
       );
 
       final index = result.indexWhere(

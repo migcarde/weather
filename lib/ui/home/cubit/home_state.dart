@@ -4,6 +4,7 @@ enum HomeStatus {
   initial,
   loading,
   data,
+  failure,
 }
 
 class HomeState extends Equatable {
