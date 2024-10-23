@@ -48,6 +48,12 @@ class MainApp extends StatelessWidget {
                       return HomePage(
                         currentForecast: state.homeViewModel!,
                       );
+                    case HomeStatus.failure:
+                      return const Center(
+                        child: Text(
+                          'Oops, something was wrong, please, try again later.',
+                        ),
+                      );
                   }
                 },
               ),
