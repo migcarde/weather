@@ -34,5 +34,8 @@ class LocationService {
     required double latitude,
     required double longitude,
   }) async =>
-      await getPlacemarkFromLocation(latitude: latitude, longitude: longitude);
+      await geocoding.placemarkFromCoordinates(
+        latitude,
+        longitude,
+      );
 }

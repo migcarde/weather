@@ -5,9 +5,11 @@ class CubitsDi {
   static void init() {
     locator.registerLazySingleton(
       () => HomeCubit(
-        getWeather: locator(),
+        getWeatherFromLocal: locator(),
         saveWeather: locator(),
         locationService: locator(),
+        getIcon: locator(),
+        getWeatherFromRemote: locator(),
       ),
     );
   }

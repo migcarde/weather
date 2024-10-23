@@ -1,8 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:weather/domain/models/weather_business.dart';
-import 'package:weather/domain/operations/save_weather.dart';
-import 'package:weather/domain/operations/weather_repository.dart';
+import 'package:weather/domain/operations/weather/save_weather.dart';
+import 'package:weather/domain/operations/weather/weather_repository.dart';
+
+import 'weather_instruments.dart';
 
 class WeatherRepositoryMock extends Mock implements WeatherRepository {}
 
@@ -20,12 +21,6 @@ void main() {
   );
 
   group('Save weather -', () {
-    const successResult = WeatherBusiness(
-      latitude: 0.0,
-      longitude: 1.0,
-      locationName: 'locationName',
-    );
-
     test('Success', () {
       // Given
       when(() => weatherRepositoryMock.saveWeather(successResult)).thenAnswer(

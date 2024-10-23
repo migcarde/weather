@@ -1,6 +1,6 @@
 import 'package:weather/domain/base/base_use_case.dart';
-import 'package:weather/domain/models/weather_business.dart';
-import 'package:weather/domain/operations/weather_repository.dart';
+import 'package:weather/domain/models/business/weather_business.dart';
+import 'package:weather/domain/operations/weather/weather_repository.dart';
 
 class SaveWeather extends BaseUseCase<void, WeatherBusiness> {
   final WeatherRepository weatherRepository;
