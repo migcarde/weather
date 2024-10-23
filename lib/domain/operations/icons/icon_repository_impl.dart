@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:weather/core/services/logger_service.dart';
 import 'package:weather/data/local/icon_local_datasource.dart';
 import 'package:weather/data/local/icon_local_entity.dart';
@@ -15,20 +17,7 @@ class IconRepositoryImpl implements IconRepository {
   });
 
   @override
-  Future<Result<List<int>>> downloadImage(String image) async {
-    try {
-      final result = await iconsRemoteDatasource.getImage(image);
-
-      return Result.success(result);
-    } catch (e) {
-      logger.error(e);
-
-      return Result.failure(e);
-    }
-  }
-
-  @override
-  Future<Result<List<int>>> getImage(int iconId, String iconPath) async {
+  Future<Result<Uint8List>> getImage(int iconId, String iconPath) async {
     try {
       final imageFromLocalResult = await iconLocalDatasource.getIcon(iconId);
 
@@ -41,11 +30,11 @@ class IconRepositoryImpl implements IconRepository {
         iconLocalDatasource.saveIcon(
           IconLocalEntity(
             id: iconId,
-            image: imageFromRemoteResult,
+            image: Uint8List.fromList(imageFromRemoteResult),
           ),
         );
 
-        return Result.success(imageFromRemoteResult);
+        return Result.success(Uint8List.fromList(imageFromRemoteResult));
       }
     } catch (e) {
       logger.error(e);
@@ -55,7 +44,7 @@ class IconRepositoryImpl implements IconRepository {
   }
 
   @override
-  Future<Result<List<int>?>> getImageFromLocal(int iconId) async {
+  Future<Result<Uint8List?>> getImageFromLocal(int iconId) async {
     try {
       final result = await iconLocalDatasource.getIcon(iconId);
 

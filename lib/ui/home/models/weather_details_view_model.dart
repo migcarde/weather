@@ -63,11 +63,11 @@ class WeatherDetailsViewModel extends Equatable {
 
 extension WeatherDataEntityExtensions on WeatherDataEntity {
   WeatherDetailsViewModel toViewModel({
-    required List<int> icon,
+    required Uint8List icon,
   }) =>
       WeatherDetailsViewModel(
         time: date,
-        icon: Uint8List.fromList(icon),
+        icon: icon,
         precipitation: precipitation,
         clouds: clouds,
         visibility: visibility,
@@ -85,7 +85,7 @@ extension WeatherDataEntityExtensions on WeatherDataEntity {
 extension WeatherDataBusinessExtensions on WeatherDataBusiness {
   WeatherDetailsViewModel toViewModel() => WeatherDetailsViewModel(
         time: time,
-        icon: Uint8List.fromList(icon),
+        icon: icon,
         precipitation: precipitation,
         clouds: clouds,
         visibility: visibility,

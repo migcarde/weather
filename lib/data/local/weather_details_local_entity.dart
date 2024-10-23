@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 import 'package:weather/data/local/local_types_ids.dart';
@@ -10,7 +12,7 @@ class WeatherDetailsLocalEntity extends HiveObject with EquatableMixin {
   final DateTime time;
 
   @HiveField(1)
-  final List<int> icon;
+  final Uint8List icon;
 
   @HiveField(2)
   final double precipitation;

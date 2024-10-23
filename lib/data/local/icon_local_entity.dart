@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 import 'package:weather/data/local/local_types_ids.dart';
@@ -10,7 +12,7 @@ class IconLocalEntity extends HiveObject with EquatableMixin {
   final int id;
 
   @HiveField(1)
-  final List<int> image;
+  final Uint8List image;
 
   IconLocalEntity({
     required this.id,

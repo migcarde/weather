@@ -1,10 +1,12 @@
+import 'dart:typed_data';
+
 import 'package:equatable/equatable.dart';
 import 'package:weather/data/local/weather_details_local_entity.dart';
 
 class WeatherDataBusiness extends Equatable {
   final DateTime time;
   final double temperature;
-  final List<int> icon;
+  final Uint8List icon;
   final double maxTemperature;
   final double minTemperature;
   final int pressure;
