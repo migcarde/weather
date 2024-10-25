@@ -73,8 +73,10 @@ extension WeatherDataEntityExtensions on WeatherDataEntity {
         visibility: visibility,
         windSpeed: wind?.speed ?? 0.0,
         pressure: main?.pressure ?? 0,
-        minTemperature: main?.minTemperature ?? 0.0,
-        maxTemperature: main?.maxTemperature ?? 0.0,
+        minTemperature:
+            main?.minTemperature != null ? main!.minTemperature - 273.0 : 0.0,
+        maxTemperature:
+            main?.maxTemperature != null ? main!.maxTemperature - 273.0 : 0.0,
         // Temperature always in celsius
         temperature:
             main?.temperature != null ? main!.temperature - 273.0 : 0.0,
