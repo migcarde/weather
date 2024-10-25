@@ -3,6 +3,7 @@ import 'package:weather/ui/current_forecast/current_forecast.dart';
 import 'package:weather/ui/current_weather/current_weather.dart';
 import 'package:weather/ui/home/models/home_view_model.dart';
 import 'package:weather/ui/location/location_widget.dart';
+import 'package:weather/ui/sunset_indicator/sunset_indicator.dart';
 import 'package:weather/ui/weekly_weather/weekly_weather.dart';
 
 class HomePage extends StatelessWidget {
@@ -54,6 +55,16 @@ class HomePage extends StatelessWidget {
                   .toList(),
             ),
           ),
+          if (currentForecast.sunrise != null && currentForecast.sunset != null)
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 34.0,
+              ),
+              child: SunsetIndicator(
+                sunrise: currentForecast.sunrise!,
+                sunset: currentForecast.sunset!,
+              ),
+            ),
         ],
       ),
     );

@@ -47,7 +47,11 @@ extension CityRemoteEntityExtensions on CityRemoteEntity {
         country: country ?? '',
         population: population ?? 0,
         timezone: timezone ?? 0,
-        sunrise: DateTime.fromMillisecondsSinceEpoch(sunrise ?? 0 * 1000),
-        sunset: DateTime.fromMillisecondsSinceEpoch(sunset ?? 0 * 1000),
+        sunrise: sunrise != null
+            ? DateTime.fromMillisecondsSinceEpoch(sunrise! * 1000)
+            : DateTime.now(),
+        sunset: sunset != null
+            ? DateTime.fromMillisecondsSinceEpoch(sunset! * 1000)
+            : DateTime.now(),
       );
 }
