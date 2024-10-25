@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:weather/core/constants/box_decoration_constants.dart';
+import 'package:weather/core/extensions/date_extensions.dart';
 import 'package:weather/l10n/app_localizations.dart';
 import 'package:weather/ui/current_forecast/widgets/forecast_by_hour.dart';
 import 'package:weather/ui/home/models/weather_details_view_model.dart';
@@ -13,18 +13,23 @@ class CurrentForecast extends StatelessWidget {
 
   final List<WeatherDetailsViewModel> weatherDetails;
 
+  static const _containerHeight = 114.0;
+  static const _paddingHorizontal = 20.0;
+  static const _paddingVertical = 12.0;
+  static const _separation = 10.0;
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final today = DateTime.now();
     return Container(
-      decoration: BoxDecorationConstants.roundedContainer(),
+      decoration: BoxDecorationConstants.roundedDecoration(),
       width: double.infinity,
-      height: 114.0,
+      height: _containerHeight,
       alignment: Alignment.centerLeft,
       padding: const EdgeInsets.symmetric(
-        horizontal: 20.0,
-        vertical: 12.0,
+        horizontal: _paddingHorizontal,
+        vertical: _paddingVertical,
       ),
       child: ListView.separated(
         shrinkWrap: true,
@@ -35,17 +40,15 @@ class CurrentForecast extends StatelessWidget {
               today.hour >= (weatherDetail.time.hour - 3) &&
               DateUtils.isSameDay(today, weatherDetail.time);
 
-          final dateFormat = DateFormat.Hm();
-          final time = dateFormat.format(weatherDetail.time);
-
           return ForecastByHour(
-            hour: isCurrentTime ? l10n.today : time,
+            hour:
+                isCurrentTime ? l10n.today : weatherDetail.time.hoursAndMinutes,
             icon: weatherDetail.icon,
             temperature: weatherDetail.temperature.round(),
           );
         },
         separatorBuilder: (context, index) => const SizedBox(
-          width: 10.0,
+          width: _separation,
         ),
         itemCount: weatherDetails.length,
       ),
