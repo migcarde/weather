@@ -11,4 +11,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get unknown => 'Desconocido';
+
+  @override
+  String get tomorrow => 'Mañana';
 }
