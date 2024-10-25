@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:weather/core/constants/color_constants.dart';
 
 class BoxDecorationConstants {
-  static BoxDecoration roundedContainer({
+  static BoxDecoration roundedDecoration({
     Color backgroundColor = ColorConstants.cardColor,
   }) =>
       BoxDecoration(

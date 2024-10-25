@@ -15,6 +15,7 @@ class CurrentWeather extends StatelessWidget {
   final String weather;
 
   static const _imageSize = 48.0;
+  static const _degreesFontSize = 80.0;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class CurrentWeather extends StatelessWidget {
         Text(
           '$degreesº',
           style: textTheme.displayLarge?.copyWith(
-            fontSize: 80.0,
+            fontSize: _degreesFontSize,
             fontWeight: FontWeight.bold,
           ),
         ),
