@@ -22,6 +22,7 @@ class _SunsetIndicatorState extends State<SunsetIndicator> {
 
   static const _paddingHorizontal = 20.0;
   static const _paddingVertical = 12.0;
+  static const _indicatorPaddingTop = 10.0;
   static const _iconPadding = 6.0;
   static const _iconSize = 24.0;
 
@@ -58,60 +59,75 @@ class _SunsetIndicatorState extends State<SunsetIndicator> {
         vertical: _paddingVertical,
       ),
       decoration: BoxDecorationConstants.roundedDecoration(),
-      child: Stack(
-        alignment: Alignment.centerLeft,
+      child: Column(
         children: [
-          SizedBox(
-            key: key,
-            width: double.infinity,
-          ),
-          AnimatedSize(
-            duration: const Duration(
-              seconds: 1,
-            ),
-            curve: Curves.easeIn,
-            child: Container(
-              width: progressWidth,
-              height: 2.0,
-              decoration: BoxDecorationConstants.roundedDecoration(
-                backgroundColor: Colors.red,
-              ),
-            ),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Icon(Icons.sunny),
+              Icon(Icons.brightness_2),
+            ],
           ),
           Padding(
-            padding: const EdgeInsets.only(
-              left: _iconPadding,
-            ),
-            child: const Icon(
-              Icons.sunny,
-              size: _iconSize,
-            )
-                .animate(
-                  target: progressWidth > 0.0 ? 1 : 0,
-                )
-                .moveX(
-                  begin: 0,
-                  end: progressWidth,
+            padding: const EdgeInsets.only(top: _indicatorPaddingTop),
+            child: Stack(
+              alignment: Alignment.centerLeft,
+              children: [
+                SizedBox(
+                  key: key,
+                  width: double.infinity,
+                ),
+                AnimatedSize(
                   duration: const Duration(
                     seconds: 1,
                   ),
                   curve: Curves.easeIn,
+                  child: Container(
+                    width: progressWidth,
+                    height: 2.0,
+                    decoration: BoxDecorationConstants.roundedDecoration(
+                      backgroundColor: Colors.red,
+                    ),
+                  ),
                 ),
-          ),
-          AnimatedSize(
-            duration: const Duration(
-              seconds: 1,
-            ),
-            curve: Curves.easeIn,
-            child: Container(
-              margin: EdgeInsets.only(
-                left: progressWidth + _iconPadding * 2 + _iconSize,
-              ),
-              width: restProgress,
-              height: 2.0,
-              decoration: BoxDecorationConstants.roundedDecoration(
-                backgroundColor: Colors.white,
-              ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: _iconPadding,
+                  ),
+                  child: const Icon(
+                    Icons.sunny,
+                    size: _iconSize,
+                  )
+                      .animate(
+                        target: progressWidth > 0.0 ? 1 : 0,
+                      )
+                      .moveX(
+                        begin: 0,
+                        end: progressWidth,
+                        duration: const Duration(
+                          seconds: 1,
+                        ),
+                        curve: Curves.easeIn,
+                      ),
+                ),
+                AnimatedSize(
+                  duration: const Duration(
+                    seconds: 1,
+                  ),
+                  curve: Curves.easeIn,
+                  alignment: Alignment.centerLeft,
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Container(
+                      width: restProgress,
+                      height: 2.0,
+                      decoration: BoxDecorationConstants.roundedDecoration(
+                        backgroundColor: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
